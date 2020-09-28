@@ -26,6 +26,10 @@ staticfiles/
 coverage.*
 htmlcov/
 
+# Chromedriver
+chromedriver
+chromedriver.exe
+
 ### macOS ###
 # General
 .DS_Store
