@@ -2,9 +2,11 @@ stages:
   - test
   - deploy
 
+# Feel free to remove these in your generated project.
 .disable_on_template: &disable_on_template
   rules:
     - if: '$CI_COMMIT_REF_NAME != "template"'
+
 
 UnitTest:
   <<: *disable_on_template
@@ -13,8 +15,20 @@ UnitTest:
   before_script:
     - pip install -r requirements.txt
   script:
-    - coverage run --include='./*' --omit='manage.py,project_name/*' manage.py test
+    - coverage run --include="./*" --omit="manage.py,project_name/*" manage.py test --exclude-tag=functional
     - coverage report -m
+
+FunctionalTest:
+  <<: *disable_on_template
+  image: python:3.8
+  stage: test
+  before_script:
+    - apt-get update -q && apt-get install -yq chromium-driver
+    - pip install -r requirements.txt
+    - python manage.py collectstatic --no-input
+  script:
+    - python manage.py test --tag=functional
+
 
 Deployment:
   <<: *disable_on_template
