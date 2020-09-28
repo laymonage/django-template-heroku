@@ -29,7 +29,7 @@ jobs:
       run: python manage.py collectstatic --no-input
     - name: Run unit tests
       run: |
-        coverage run --parallel --include="./*" --omit="manage.py,project_name/*" \
+        coverage run --parallel --include="./*" --omit="manage.py,{{ project_name }}/*" \
         manage.py test --exclude-tag=functional
     - name: Upload unit test coverage
       uses: actions/upload-artifact@v2
@@ -59,7 +59,7 @@ jobs:
       run: python manage.py collectstatic --no-input
     - name: Run functional tests
       run: |
-        coverage run --parallel --include="./*" --omit="manage.py,project_name/*" \
+        coverage run --parallel --include="./*" --omit="manage.py,{{ project_name }}/*" \
         manage.py test --tag=functional
     - name: Upload functional test coverage
       uses: actions/upload-artifact@v2
