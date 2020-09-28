@@ -2,17 +2,22 @@ stages:
   - test
   - deploy
 
+.disable_on_template: &disable_on_template
+  rules:
+    - if: '$CI_COMMIT_REF_NAME != "template"'
+
 UnitTest:
+  <<: *disable_on_template
   image: python:3.8
   stage: test
   before_script:
     - pip install -r requirements.txt
-  when: on_success
   script:
     - coverage run --include='./*' --omit='manage.py,project_name/*' manage.py test
     - coverage report -m
 
 Deployment:
+  <<: *disable_on_template
   image: ruby:2.7
   stage: deploy
   before_script:
