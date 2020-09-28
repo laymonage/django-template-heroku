@@ -23,8 +23,8 @@ deployed to Heroku via GitHub Actions or GitLab CI.
 ## Usage instructions
 
 1. Create a directory for the project that you want to create (example:
-   `project_name`), then open a Command Prompt (cmd) or Terminal in that
-   directory.
+   `{{ project_name }}`), then open a Command Prompt (cmd) or Terminal in
+   that directory.
 
 2. Create a Python virtual environment in it.
 
@@ -61,14 +61,14 @@ deployed to Heroku via GitHub Actions or GitLab CI.
 5. Create a new Django project with this template.
 
    ```shell
-   django-admin startproject --template="https://codeload.github.com/laymonage/django-template-heroku/zip/template" --extension="py,yml,md" --name="Procfile" project_name .
+   django-admin startproject --template="https://codeload.github.com/laymonage/django-template-heroku/zip/template" --extension="py,yml,md" --name="Procfile" {{ project_name }} .
    ```
 
-   > Note: rename `project_name` with the desired project name. Notice that
-   > there is a period (`.`) at the end of the command. If there's an error
-   > when downloading the template from GitHub, please visit the link manually
-   > and point the `--template` argument to the location of your `.zip` file
-   > that you downloaded to your computer.
+   > Note: rename `{{ project_name }}` with the desired project name. Notice
+   > that there is a period (`.`) at the end of the command. If there's an
+   > error when downloading the template from GitHub, please visit the link
+   > manually and point the `--template` argument to the location of your
+   > `.zip` file that you downloaded to your computer.
 
 6. Sign in to [Heroku Dashboard][heroku-dashboard] and create a new Heroku
    application. The application name **does not have to be the same** as the
@@ -261,7 +261,7 @@ development in the future.
    command.
 
     ```shell
-    coverage run --include="./*" --omit="venv/*,manage.py,project_name/*" manage.py test
+    coverage run --include="./*" --omit="venv/*,manage.py,{{ project_name }}/*" manage.py test
     ```
 
    > Note: this command runs both unit tests and functional tests at once,
