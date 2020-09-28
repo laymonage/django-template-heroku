@@ -1,3 +1,6 @@
+# Meta
+django-template-heroku-template.*
+
 # Virtual environments
 .env
 .venv
