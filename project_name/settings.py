@@ -19,8 +19,9 @@ import dj_database_url
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
+# Quick-start development settings
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
+# for best-practices.
 
 # SECURITY WARNING: keep the secret key used in production secret!
 # Please set SECRET_KEY environment variable in your production environment
@@ -35,6 +36,8 @@ SECRET_KEY = os.getenv(
 PRODUCTION = os.getenv('DATABASE_URL') is not None
 
 # SECURITY WARNING: don't run with debug turned on in production!
+# If you want to enable debugging on Heroku for learning purposes,
+# set this to True.
 DEBUG = not PRODUCTION
 
 HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
@@ -99,6 +102,7 @@ DATABASES = {
     }
 }
 
+# Set database settings automatically using DATABASE_URL.
 if PRODUCTION:
     DATABASES['default'] = dj_database_url.config(
         conn_max_age=600, ssl_require=True
@@ -126,6 +130,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
+# Feel free to change these according to your needs.
 
 LANGUAGE_CODE = 'en-us'
 
