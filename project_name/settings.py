@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +21,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '61f1byet7&3)7d+0rtop(!dbg%@5mn!e++gba#$yl5wr!0&w3w'
+# Please set SECRET_KEY environment variable in your production environment
+# (e.g. Heroku).
+SECRET_KEY = os.getenv(
+    'SECRET_KEY', '61f1byet7&3)7d+0rtop(!dbg%@5mn!e++gba#$yl5wr!0&w3w'
+)
+
+# Automatically determine environment by detecting if DATABASE_URL variable.
+# DATABASE_URL is provided by Heroku if a database add-on is added
+# (e.g. Heroku Postgres).
+PRODUCTION = os.getenv('DATABASE_URL') is not None
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = not PRODUCTION
 
-ALLOWED_HOSTS = []
+HEROKU_APP_NAME = os.getenv('HEROKU_APP_NAME', '')
+
+ALLOWED_HOSTS = [f'{HEROKU_APP_NAME}.herokuapp.com']
+
+if DEBUG:
+    ALLOWED_HOSTS += ['.localhost', '127.0.0.1', '[::1]']
 
 
 # Application definition
