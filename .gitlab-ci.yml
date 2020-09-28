@@ -1,3 +1,4 @@
+image: python:3.8
 stages:
   - test
   - deploy
@@ -11,27 +12,42 @@ stages:
   pip install -r requirements.txt
   python manage.py collectstatic --no-input
 
+.coverage_artifacts: &coverage_artifacts
+  artifacts:
+    paths:
+      - .coverage*
+
 
 UnitTest:
   <<: *disable_on_template
-  image: python:3.8
+  <<: *coverage_artifacts
   stage: test
   before_script:
     - *django_before_script
   script:
-    - coverage run --include="./*" --omit="manage.py,project_name/*" manage.py test --exclude-tag=functional
-    - coverage report -m
+    - coverage run --parallel --include="./*" --omit="manage.py,project_name/*"
+      manage.py test --exclude-tag=functional
 
 FunctionalTest:
   <<: *disable_on_template
-  image: python:3.8
+  <<: *coverage_artifacts
   stage: test
   before_script:
     - apt-get update -q && apt-get install -yq chromium-driver
     - *django_before_script
   script:
-    - python manage.py test --tag=functional
+    - coverage run --parallel --include="./*" --omit="manage.py,project_name/*"
+      manage.py test --tag=functional
 
+
+Coverage:
+  <<: *disable_on_template
+  stage: deploy
+  before_script:
+    - pip install coverage
+    - coverage combine
+  script:
+    - coverage report -m
 
 Deployment:
   <<: *disable_on_template
