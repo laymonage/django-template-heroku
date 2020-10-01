@@ -168,8 +168,8 @@ kemudahan pengembangan web kamu ke depannya.
 
    Untuk dapat mengakses situs administrasi Django milik proyek kalian yang ada
    di Heroku, buka Heroku Dashboard. Lalu, klik aplikasi kalian dan klik tombol
-   More > Run console di pojok kanan atas. Ketik `bash` pada dialog *pop-up*
-   yang muncul. Jika sudah, masukkan perintah
+   **More > Run console** di pojok kanan atas. Ketik `bash` pada dialog
+   *pop-up* yang muncul. Jika sudah, masukkan perintah
    `python manage.py createsuperuser` dan ikuti instruksinya.
 
    > Psst, di dalam `bash`, kamu bisa lihat-lihat proyek Django kamu seperti
