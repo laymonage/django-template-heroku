@@ -3,6 +3,13 @@ stages:
   - test
   - deploy
 
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+
+cache:
+  paths:
+    - .cache/pip
+
 # Feel free to remove this in your generated project.
 .disable_on_template: &disable_on_template
   rules:
