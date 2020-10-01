@@ -1,4 +1,5 @@
 from django.test import LiveServerTestCase, TestCase, tag
+from django.urls import reverse
 from selenium import webdriver
 
 
@@ -10,12 +11,12 @@ class FunctionalTestCase(LiveServerTestCase):
     def setUpClass(cls):
         super().setUpClass()
         # Change to another webdriver if desired (and update CI accordingly).
-        chrome_options = webdriver.chrome.options.Options()
+        options = webdriver.chrome.options.Options()
         # These options are needed for CI with Chromium.
-        chrome_options.headless = True  # Disable GUI.
-        chrome_options.add_argument('--no-sandbox')
-        chrome_options.add_argument('--disable-dev-shm-usage')
-        cls.selenium = webdriver.Chrome(options=chrome_options)
+        options.headless = True  # Disable GUI.
+        options.add_argument('--no-sandbox')
+        options.add_argument('--disable-dev-shm-usage')
+        cls.selenium = webdriver.Chrome(options=options)
 
     @classmethod
     def tearDownClass(cls):
@@ -26,6 +27,9 @@ class FunctionalTestCase(LiveServerTestCase):
 class MainTestCase(TestCase):
     def test_root_url_status_200(self):
         response = self.client.get('/')
+        self.assertEqual(response.status_code, 200)
+        # You can also use path names instead of explicit paths.
+        response = self.client.get(reverse('main:home'))
         self.assertEqual(response.status_code, 200)
 
 
