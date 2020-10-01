@@ -1,10 +1,20 @@
 # django-template-heroku
 
-[![pipeline status][pipeline-badge]][commits]
-[![coverage report][coverage-badge]][commits]
+[![Test and Deploy][actions-badge]][commits-gh]
+[![pipeline status][pipeline-badge]][commits-gl]
+[![coverage report][coverage-badge]][commits-gl]
 
 Repositori ini berisi sebuah templat untuk membuat proyek Django yang siap
-di-*deploy* ke Heroku.
+di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
+
+## Daftar isi
+
+- [Daftar isi](#daftar-isi)
+- [Instruksi penggunaan](#instruksi-penggunaan)
+- [Lanjutan](#lanjutan)
+- [Tips pengembangan](#tips-pengembangan)
+- [Sihir macam apa ini?](#sihir-macam-apa-ini)
+- [Berkontribusi](#berkontribusi)
 
 ## Instruksi penggunaan
 
@@ -199,6 +209,8 @@ kemudahan pengembangan web kamu ke depannya.
    > Jika ingin melihat proses *functional test* di komputer kamu, nonaktifkan
    > opsi `headless` pada `tests.py`. Namun, jangan lupa untuk mengaktifkannya
    > kembali karena opsi tersebut dibutuhkan oleh GitLab CI/GitHub Actions.
+   > Pastikan kamu sudah menjalankan perintah `collectstatic` sebelum
+   > menjalankan *functional test*.
 
 3. Atur konfigurasi *code coverage* di GitLab.
 
@@ -220,6 +232,10 @@ kemudahan pengembangan web kamu ke depannya.
    coverage run --include="./*" --omit="venv/*,manage.py,project_name/*" manage.py test
    ```
 
+   > Catatan: Perintah ini akan menjalan *unit test* dan *functional test*
+   > sekaligus, jadi pastikan kamu sudah menjalankan perintah `collectstatic`
+   > sebelum menjalankan tes.
+
 ## Tips pengembangan
 
 1. Mulai sekarang, **biasakan** untuk me-*reload* *browser* kamu dengan
@@ -232,7 +248,23 @@ kemudahan pengembangan web kamu ke depannya.
    *static* kamu supaya dapat diakses lebih cepat. Dengan menekan tombol
    <kbd>Shift</kbd>, *browser* akan [mem-*bypass* berkas *static* yang sudah
    di-*cache*][bypass-cache].
-2.
+2. Biasakan untuk menulis tes yang berkualitas untuk proyek web kamu, terutama
+   untuk logika-logika seperti yang ada pada bagian *views*. Membuat tes akan
+   memudahkan kamu untuk menemukan *bug* pada program kamu lebih awal. Selain
+   itu, tes juga dapat mencegah kamu menciptakan *bug* baru ketika
+   mengembangkan proyek web kamu.
+3. *Code coverage* 100% tidak menjamin proyek kamu bebas *bug*. Namun, memiliki
+   tes yang menguji proyek kamu secara keseluruhan tentu akan sangat
+   bermanfaat. Mulailah menulis tes setiap kali kamu membuat fungsionalitas
+   baru agar *code coverage* tetap terjaga.
+4. Templat ini sengaja tidak menyertakan konfigurasi untuk *linting* seperti
+   menggunakan [`flake8`][flake8] atau [`pylint`][pylint]. Hal ini untuk
+   mencegah munculnya *warning* pada GitHub Actions atau GitLab CI jika kode
+   kamu tidak sesuai aturan-aturan yang diterapkan *linter* tersebut. Jika kamu
+   tidak ingin repot mengatur kode kamu supaya rapi, silakan coba
+   [`black`][black] dan [`isort`][isort]. Akan sangat baik apabila kamu juga
+   membuat konfigurasi untuk menjalankan *linter* tersebut di GitHub Actions
+   atau GitLab CI untuk proyek yang kamu buat.
 
 ## Sihir macam apa ini?
 
@@ -246,12 +278,33 @@ Templat ini akan di-*render* dengan variabel-variabel yang bisa dikirimkan saat
 menjalankan `startproject`. Cara kerjanya mirip dengan Django *templates* dan
 *context variables* yang bisa dimasukkan ke dalamnya.
 
+Mohon jadikan templat ini sebagai **sumber belajar sebanyak-banyaknya**.
+Templat ini memang dapat memudahkan kamu untuk membuat proyek Django yang siap
+di-*deploy* tanpa perlu melakukan banyak konfigurasi. Namun, akan sangat
+bermanfaat bagi kamu apabila kamu memahami cara kerja konfigurasi yang ada di
+templat ini.
+
+## Berkontribusi
+
+Apabila ingin berkontribusi ke templat ini, silakan buat *issue* atau kirim
+*pull request* ke repositori untuk templat ini di [**GitHub**][repo-gh].
+Repositori ini juga dicerminkan ke [GitLab][repo-gl] untuk keperluan
+demonstrasi.
+
+[actions-badge]: https://github.com/laymonage/django-template-heroku/workflows/Test%20and%20Deploy/badge.svg
+[commits-gh]: https://github.com/laymonage/django-template-heroku/commits/master
 [pipeline-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/pipeline.svg
 [coverage-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/coverage.svg
-[commits]: https://gitlab.com/laymonage/django-template-heroku/-/commits/master
+[commits-gl]: https://gitlab.com/laymonage/django-template-heroku/-/commits/master
 [heroku-dashboard]: https://dashboard.heroku.com
 [djecrety]: https://djecrety.ir
 [chromedriver]: https://chromedriver.chromium.org/downloads
 [homebrew]: https://brew.sh
 [bypass-cache]: https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache
+[flake8]: https://pypi.org/project/flake8
+[pylint]: https://pypi.org/project/pylint
+[black]: https://pypi.org/project/black
+[isort]: https://pypi.org/project/isort
 [template]: https://docs.djangoproject.com/en/3.1/ref/django-admin/#cmdoption-startproject-template
+[repo-gh]: https://github.com/laymonage/django-template-heroku
+[repo-gl]: https://gitlab.com/laymonage/django-template-heroku
