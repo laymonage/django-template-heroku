@@ -52,28 +52,29 @@ di-*deploy* ke Heroku.
    > Perhatikan bahwa terdapat tanda titik (`.`) di akhir perintah.
    > Apabila muncul *error* terkait pengunduhan templat dari GitHub, silakan
    > kunjungi pranala tersebut secara manual dan arahkan argumen `--template`
-   > ke lokasi berkas `.zip` yang kamu unduh.
+   > ke lokasi berkas `.zip` yang sudah kamu unduh ke komputer kamu.
 
 6. Masuk ke [Heroku Dashboard][heroku-dashboard] dan buat aplikasi Heroku baru.
-   Nama aplikasi ini **tidak harus sama** dengan nama proyek Django kamu.
-   Lalu, buka bagian Settings dari aplikasi tersebut. Pada bagian Config Vars,
-   klik tombol Reveal Config Vars. Tambahkan variabel bernama `HEROKU_APP_NAME`
-   yang bernilai nama aplikasi Heroku kamu **tanpa `.herokuapp.com`**. Lalu,
-   tambahkan juga variabel bernama `SECRET_KEY` dengan nilai berupa sebuah
-   kunci yang dihasilkan oleh situs [Djecrety][djecrety].
+   Nama aplikasi ini **tidak harus sama** dengan nama proyek Django kamu. Lalu,
+   buka bagian **Settings** dari aplikasi tersebut. Pada bagian **Config
+   Vars**, klik tombol **Reveal Config Vars**. Tambahkan variabel bernama
+   `HEROKU_APP_NAME` yang bernilai nama aplikasi Heroku kamu **tanpa
+   `.herokuapp.com`**. Lalu, tambahkan juga variabel bernama `SECRET_KEY`
+   dengan nilai berupa sebuah kunci yang dihasilkan oleh situs
+   [Djecrety][djecrety].
 
 7. Buat *project*/repositori baru di GitLab/GitHub (pilih salah satu).
    **Jangan** pilih opsi untuk menginisialisasi repositori dengan `README.md`,
    `LICENSE`, ataupun `.gitignore`. Biarkan kosong saja.
 
-8. Jika menggunakan GitLab, buka menu Settings > CI/CD di *sidebar*
-   sebelah kiri. Pada bagian variabel, tambahkan variabel bernama
+8. Jika menggunakan GitLab, buka menu **Settings > CI/CD** di *sidebar*
+   sebelah kiri. Pada bagian **Variables**, tambahkan variabel bernama
    `HEROKU_API_KEY` yang bernilai API *key* akun Heroku kamu. Lalu, tambahkan
    juga variabel bernama `HEROKU_APP_NAME` yang bernilai nama aplikasi Heroku
    kamu **tanpa `.herokuapp.com`**.
 
-   Jika menggunakan GitHub, lakukan hal yang sama melalui menu Settings >
-   Secrets.
+   Jika menggunakan GitHub, lakukan hal yang sama melalui menu **Settings >
+   Secrets**.
 
 9. Buat direktori ini menjadi sebuah repositori Git dan buatlah *commit*
    pertama.
@@ -92,7 +93,7 @@ di-*deploy* ke Heroku.
     git push -u origin master
     ```
 
-11. Silakan cek Pipelines di GitLab atau Actions di GitHub. Jika
+11. Silakan cek **Pipelines** di GitLab atau Actions di GitHub. Jika
     langkah-langkah diikuti dengan benar, maka proyek Django kamu akan berhasil
     di-*deploy* ke Heroku.
 
@@ -203,14 +204,14 @@ kemudahan pengembangan web kamu ke depannya.
 
    *Code coverage* merupakan salah satu metrik yang berguna untuk mengukur
    sudah seberapa banyak kode kamu yang teruji. GitLab punya fitur untuk
-   menangkap *code coverage* dari *output* sebuah *job* di Pipelines.
-   Untuk mengaturnya, silakan buka Settings > CI/CD > General pipelines. Pada
+   menangkap *code coverage* dari *output* sebuah *job* di **Pipelines**. Untuk
+   mengaturnya, silakan buka **Settings > CI/CD > General pipelines**. Pada
    bagian **Test coverage parsing**, isikan ekspresi reguler berikut:
    `^TOTAL.*\s+(\d+\%)$` (kira-kira ini untuk apa ya?), lalu simpan.
 
-   Nantinya, pada bagian *Coverage report* akan muncul *badge* yang menunjukkan
-   *coverage* proyek kamu. *Badge* ini bisa kamu masukkan ke dalam `README.md`
-   seperti yang ada pada berkas ini.
+   Nantinya, pada bagian **Coverage report** akan muncul *badge* yang
+   menunjukkan *coverage* proyek kamu. *Badge* ini bisa kamu masukkan ke dalam
+   `README.md` seperti yang ada pada berkas ini.
 
    Untuk menjalankan tes dengan pengukuran *coverage* pada komputer lokal kamu,
    gunakan perintah berikut.
@@ -218,6 +219,20 @@ kemudahan pengembangan web kamu ke depannya.
    ```shell
    coverage run --include="./*" --omit="venv/*,manage.py,project_name/*" manage.py test
    ```
+
+## Tips pengembangan
+
+1. Mulai sekarang, **biasakan** untuk me-*reload* *browser* kamu dengan
+   <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>R</kbd> (beberapa *browser* juga bisa
+   dengan <kbd>Shift</kbd>+<kbd>F5</kbd>), bukan hanya
+   <kbd>Ctrl</kbd>+<kbd>R</kbd> atau <kbd>F5</kbd>. Jika tidak, ketika kamu
+   mengembangkan web secara lokal, kamu mungkin akan sering menemukan kasus di
+   mana berkas *static* yang muncul di *browser* tidak berubah setelah kamu
+   memodifikasinya. Ini terjadi karena *browser* membuat *cache* dari berkas
+   *static* kamu supaya dapat diakses lebih cepat. Dengan menekan tombol
+   <kbd>Shift</kbd>, *browser* akan [mem-*bypass* berkas *static* yang sudah
+   di-*cache*][bypass-cache].
+2.
 
 ## Sihir macam apa ini?
 
@@ -227,7 +242,7 @@ Alamat tersebut dapat berupa lokasi berkas di komputer lokal atau URL untuk
 mengunduh sebuah berkas arsip. GitLab/GitHub menyediakan opsi untuk mengunduh
 repositori sebagai arsip `.zip`... sisanya silakan dipahami sendiri :)
 
-Templat ini akan di-render dengan variabel-variabel yang bisa dikirimkan saat
+Templat ini akan di-*render* dengan variabel-variabel yang bisa dikirimkan saat
 menjalankan `startproject`. Cara kerjanya mirip dengan Django *templates* dan
 *context variables* yang bisa dimasukkan ke dalamnya.
 
@@ -238,4 +253,5 @@ menjalankan `startproject`. Cara kerjanya mirip dengan Django *templates* dan
 [djecrety]: https://djecrety.ir
 [chromedriver]: https://chromedriver.chromium.org/downloads
 [homebrew]: https://brew.sh
+[bypass-cache]: https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache
 [template]: https://docs.djangoproject.com/en/3.1/ref/django-admin/#cmdoption-startproject-template
