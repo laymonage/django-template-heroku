@@ -87,6 +87,9 @@ di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
    Jika menggunakan GitHub, lakukan hal yang sama melalui menu **Settings >
    Secrets**.
 
+   > Catatan: API *key* akun Heroku kamu dapat dilihat melalui
+   > [**Account settings**][account-settings].
+
 9. Buat direktori ini menjadi sebuah repositori Git dan buatlah *commit*
    pertama.
 
@@ -312,6 +315,7 @@ ketentuan yang berbeda.
 [commits-gl]: https://gitlab.com/laymonage/django-template-heroku/-/commits/master
 [heroku-dashboard]: https://dashboard.heroku.com
 [djecrety]: https://djecrety.ir
+[account-settings]: https://dashboard.heroku.com/account
 [chromedriver]: https://chromedriver.chromium.org/downloads
 [homebrew]: https://brew.sh
 [ticket-21227]: https://code.djangoproject.com/ticket/21227
