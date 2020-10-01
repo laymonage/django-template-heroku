@@ -90,16 +90,36 @@ di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
    > Catatan: API *key* akun Heroku kamu dapat dilihat melalui
    > [**Account settings**][account-settings].
 
-9. Buat direktori ini menjadi sebuah repositori Git dan buatlah *commit*
-   pertama.
+9. **Jika menggunakan GitHub**, pindahkan berkas `tnd.yml` ke direktori
+   `.github/workflows` dengan cara berikut.
+
+   Di Windows:
 
    ```shell
-   git init
-   git add .
-   git commit -m "Initial commit"
+   mkdir ".github\workflows"
+   move tnd.yml ".github\workflows\"
    ```
 
-10. Tambahkan *remote* baru bernama `origin` yang mengarah ke repositori yang
+   Di Linux/macOS:
+
+   ```shell
+   mkdir -p .github/workflows
+   mv tnd.yml .github/workflows/
+   ```
+
+   Jika hanya menggunakan GitLab, kamu dapat menghapus berkas `tnd.yml`.
+   Jika hanya menggunakan GitHub, kamu dapat menghapus berkas `.gitlab-ci.yml`.
+
+10. Buat direktori proyek kamu menjadi sebuah repositori Git dan buatlah
+    *commit* pertama.
+
+    ```shell
+    git init
+    git add .
+    git commit -m "Initial commit"
+    ```
+
+11. Tambahkan *remote* baru bernama `origin` yang mengarah ke repositori yang
     kamu buat di GitLab/GitHub, lalu push ke repositori tersebut.
 
     ```shell
@@ -107,13 +127,13 @@ di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
     git push -u origin master
     ```
 
-11. Silakan cek **Pipelines** di GitLab atau Actions di GitHub. Jika
+12. Silakan cek **Pipelines** di GitLab atau Actions di GitHub. Jika
     langkah-langkah diikuti dengan benar, maka proyek Django kamu akan berhasil
     di-*deploy* ke Heroku.
 
     > Contoh: https://django-template-heroku.herokuapp.com
 
-12. Selamat! Sekarang, kamu hanya perlu fokus mengembangkan proyek web kamu
+13. Selamat! Sekarang, kamu hanya perlu fokus mengembangkan proyek web kamu
     tanpa perlu pusing dengan masalah *deployment*. Untuk mengembangkan
     proyek web kamu, silakan instal terlebih dahulu *package-package* yang
     diperlukan dengan perintah berikut.
@@ -122,21 +142,21 @@ di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
     python -m pip install -r requirements.txt
     ```
 
-13. Lanjutkan dengan membuat basis data lokal dan mengumpulkan
+14. Lanjutkan dengan membuat basis data lokal dan mengumpulkan
     berkas *static* menjadi satu direktori dengan perintah-perintah berikut.
 
     ```shell
     python manage.py migrate
     python manage.py collectstatic
     ```
-14. Jika sudah, kamu bisa menjalankan *web server* kamu secara lokal dengan
+15. Jika sudah, kamu bisa menjalankan *web server* kamu secara lokal dengan
     perintah berikut.
 
     ```shell
     python manage.py runserver
     ```
 
-15. Mulai dari sini, kamu cukup edit berkas-berkas proyek Django kamu
+16. Mulai dari sini, kamu cukup edit berkas-berkas proyek Django kamu
     sesuai kebutuhan. Lalu, jangan lupa gunakan perintah `git add`,
     `git commit`, dan `git push` untuk mengunggah perubahanmu ke GitLab/GitHub
     (yang kemudian akan di-*deploy* ke Heroku). Jangan lupa untuk membuat
@@ -150,7 +170,7 @@ di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
     repositori <sup><sub>(kecuali kamu mengubah konfigurasi templat sehingga
     hal tersebut tidak diperlukan... tetapi mengapa?)</sub></sup>.
 
-16. Untuk menjalankan *unit test*, kamu bisa gunakan perintah berikut.
+17. Untuk menjalankan *unit test*, kamu bisa gunakan perintah berikut.
 
     ```shell
     python manage.py test --exclude-tag=functional
