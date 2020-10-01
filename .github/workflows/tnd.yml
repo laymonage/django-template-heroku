@@ -2,11 +2,11 @@ name: Test and Deploy
 
 on:
   push:
-    branches:
-      - master
+    branches-ignore:
+      - template
   pull_request:
-    branches:
-      - master
+    branches-ignore:
+      - template
 
 jobs:
   UnitTest:
