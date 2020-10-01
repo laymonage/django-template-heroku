@@ -50,7 +50,8 @@ Coverage:
     - coverage report -m
 
 Deployment:
-  <<: *disable_on_template
+  rules:
+    - if: '$CI_COMMIT_REF_NAME == "master"'
   image: ruby:2.7
   stage: deploy
   before_script:
