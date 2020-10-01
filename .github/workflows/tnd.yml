@@ -1,0 +1,127 @@
+name: Test and Deploy
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  UnitTest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-${{ github.job }}-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          pip-
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Collect static files
+      run: python manage.py collectstatic --no-input
+    - name: Run unit tests
+      run: |
+        coverage run --parallel --include="./*" --omit="manage.py,project_name/*" \
+        manage.py test --exclude-tag=functional
+    - name: Upload unit test coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: unittest-coverage
+        path: .coverage*
+
+  FunctionalTest:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-${{ github.job }}-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          pip-
+    - name: Install ChromiumDriver
+      run: sudo apt-get update -q && sudo apt-get install -yq chromium-driver
+    - name: Install dependencies
+      run: pip install -r requirements.txt
+    - name: Collect static files
+      run: python manage.py collectstatic --no-input
+    - name: Run functional tests
+      run: |
+        coverage run --parallel --include="./*" --omit="manage.py,project_name/*" \
+        manage.py test --tag=functional
+    - name: Upload functional test coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: functionaltest-coverage
+        path: .coverage*
+
+  Coverage:
+    runs-on: ubuntu-latest
+    needs: [UnitTest, FunctionalTest]
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.8
+    - uses: actions/cache@v2
+      with:
+        path: ~/.cache/pip
+        key: pip-${{ github.job }}-${{ hashFiles('requirements.txt') }}
+        restore-keys: |
+          pip-
+    - name: Install coverage
+      run: pip install coverage
+    - name: Download unit test coverage
+      uses: actions/download-artifact@v2
+      with:
+        name: unittest-coverage
+    - name: Download functional test coverage
+      uses: actions/download-artifact@v2
+      with:
+        name: functionaltest-coverage
+    - name: Combine unit test and functional test coverage
+      run: coverage combine
+    - name: Show coverage report
+      run: coverage report -m
+    - name: Generate coverage report to HTML
+      run: coverage html
+    - name: Upload overall test coverage
+      uses: actions/upload-artifact@v2
+      with:
+        name: coverage
+        path: htmlcov/
+
+  Deployment:
+    if: github.ref == 'refs/heads/master'
+    runs-on: ubuntu-latest
+    needs: [UnitTest, FunctionalTest]
+    env:
+      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
+      HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Ruby 2.7
+      uses: actions/setup-ruby@v1
+      with:
+        ruby-version: 2.7
+    - name: Install dpl
+      run: gem install dpl
+    - name: Install Heroku CLI
+      run: wget -qO- https://cli-assets.heroku.com/install-ubuntu.sh | sh
+    - name: Deploy to Heroku
+      run: dpl --provider=heroku --app=$HEROKU_APP_NAME --api-key=$HEROKU_API_KEY
+    - name: Run migrations on Heroku
+      run: heroku run --app $HEROKU_APP_NAME migrate
