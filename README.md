@@ -15,6 +15,7 @@ di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
 - [Tips pengembangan](#tips-pengembangan)
 - [Sihir macam apa ini?](#sihir-macam-apa-ini)
 - [Berkontribusi](#berkontribusi)
+- [Lisensi](#lisensi)
 
 ## Instruksi penggunaan
 
@@ -291,6 +292,12 @@ Apabila ingin berkontribusi ke templat ini, silakan buat *issue* atau kirim
 Repositori ini juga dicerminkan ke [GitLab][repo-gl] untuk keperluan
 demonstrasi.
 
+## Lisensi
+
+Templat ini didistribusikan dengan lisensi [The Unlicense][license]. Proyek
+yang dibuat dengan templat ini dipersilakan untuk didistribusikan dengan
+ketentuan yang berbeda.
+
 [actions-badge]: https://github.com/laymonage/django-template-heroku/workflows/Test%20and%20Deploy/badge.svg
 [commits-gh]: https://github.com/laymonage/django-template-heroku/commits/master
 [pipeline-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/pipeline.svg
@@ -308,3 +315,4 @@ demonstrasi.
 [template]: https://docs.djangoproject.com/en/3.1/ref/django-admin/#cmdoption-startproject-template
 [repo-gh]: https://github.com/laymonage/django-template-heroku
 [repo-gl]: https://gitlab.com/laymonage/django-template-heroku
+[license]: LICENSE
