@@ -213,6 +213,13 @@ kemudahan pengembangan web kamu ke depannya.
    > Pastikan kamu sudah menjalankan perintah `collectstatic` sebelum
    > menjalankan *functional test*.
 
+   > Catatan khusus pengguna Windows: ketika kamu menjalankan
+   > *functional test*, mungkin akan muncul *error* seperti
+   > `ConnectionResetError: [WinError 10054] An existing connection was forcibly
+   > closed by the remote host`. Selama tes tetap berjalan sampai selesai,
+   > abaikan saja masalah tersebut. Ini memang [*bug*][ticket-21227] yang belum
+   > diperbaiki untuk Django di Windows.
+
 3. Atur konfigurasi *code coverage* di GitLab.
 
    *Code coverage* merupakan salah satu metrik yang berguna untuk mengukur
@@ -307,6 +314,7 @@ ketentuan yang berbeda.
 [djecrety]: https://djecrety.ir
 [chromedriver]: https://chromedriver.chromium.org/downloads
 [homebrew]: https://brew.sh
+[ticket-21227]: https://code.djangoproject.com/ticket/21227
 [bypass-cache]: https://en.wikipedia.org/wiki/Wikipedia:Bypass_your_cache
 [flake8]: https://pypi.org/project/flake8
 [pylint]: https://pypi.org/project/pylint
