@@ -20,7 +20,7 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: pip-${{ github.job }}-${{ hashFiles('requirements.txt') }}
+        key: pip-{% verbatim %}${{ github.job }}-${{ hashFiles('requirements.txt') }}{% endverbatim %}
         restore-keys: |
           pip-
     - name: Install dependencies
@@ -48,7 +48,7 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: pip-${{ github.job }}-${{ hashFiles('requirements.txt') }}
+        key: pip-{% verbatim %}${{ github.job }}-${{ hashFiles('requirements.txt') }}{% endverbatim %}
         restore-keys: |
           pip-
     - name: Install ChromiumDriver
@@ -79,7 +79,7 @@ jobs:
     - uses: actions/cache@v2
       with:
         path: ~/.cache/pip
-        key: pip-${{ github.job }}-${{ hashFiles('requirements.txt') }}
+        key: pip-{% verbatim %}${{ github.job }}-${{ hashFiles('requirements.txt') }}{% endverbatim %}
         restore-keys: |
           pip-
     - name: Install coverage
@@ -109,8 +109,8 @@ jobs:
     runs-on: ubuntu-latest
     needs: [UnitTest, FunctionalTest]
     env:
-      HEROKU_API_KEY: ${{ secrets.HEROKU_API_KEY }}
-      HEROKU_APP_NAME: ${{ secrets.HEROKU_APP_NAME }}
+      HEROKU_API_KEY: ${% verbatim %}{{ secrets.HEROKU_API_KEY }}{% endverbatim %}
+      HEROKU_APP_NAME: ${% verbatim %}{{ secrets.HEROKU_APP_NAME }}{% endverbatim %}
     steps:
     - uses: actions/checkout@v2
     - name: Set up Ruby 2.7
@@ -129,6 +129,6 @@ jobs:
       name: Create GitHub deployment
       with:
         initial_status: success
-        token: ${{ github.token }}
-        target_url: https://${{ secrets.HEROKU_APP_NAME }}.herokuapp.com
+        token: ${% verbatim %}{{ github.token }}{% endverbatim %}
+        target_url: https://${% verbatim %}{{ secrets.HEROKU_APP_NAME }}{% endverbatim %}.herokuapp.com
         environment: production
