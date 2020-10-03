@@ -55,6 +55,10 @@ Coverage:
     - coverage combine
   script:
     - coverage report -m
+    - coverage html
+  artifacts:
+    paths:
+      - htmlcov/
 
 Deployment:
   rules:
