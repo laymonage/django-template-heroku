@@ -7,6 +7,8 @@
 Repositori ini berisi sebuah templat untuk membuat proyek Django yang siap
 di-*deploy* ke Heroku melalui GitHub Actions atau GitLab CI.
 
+*To view this file in English, [click here][readme-en].*
+
 ## Daftar isi
 
 - [Daftar isi](#daftar-isi)
@@ -200,7 +202,7 @@ kemudahan pengembangan web kamu ke depannya.
    > seperti `python manage.py migrate` atau bahkan perintah-perintah Linux
    > *shell*.
 
-2. Unduh *chromedriver* (atau *webdriver* lain yang kamu inginkan) untuk
+2. Unduh `chromedriver` (atau *webdriver* lain yang kamu inginkan) untuk
    komputer kamu agar bisa menjalankan *functional test* secara lokal.
    **Ini akan sangat bermanfaat untuk salah satu *story*.**
 
@@ -333,6 +335,7 @@ ketentuan yang berbeda.
 [pipeline-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/pipeline.svg
 [coverage-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/coverage.svg
 [commits-gl]: https://gitlab.com/laymonage/django-template-heroku/-/commits/master
+[readme-en]: README.en.md
 [heroku-dashboard]: https://dashboard.heroku.com
 [djecrety]: https://djecrety.ir
 [account-settings]: https://dashboard.heroku.com/account

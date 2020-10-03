@@ -7,6 +7,9 @@
 This repository contains a template for creating a Django project ready to be
 deployed to Heroku via GitHub Actions or GitLab CI.
 
+*Untuk melihat berkas ini dalam bahasa Indonesia,
+[klik di sini][readme-id].*
+
 ## Table of contents
 
 - [Table of contents](#table-of-contents)
@@ -326,6 +329,7 @@ generated with this template may be distributed under different licenses.
 [pipeline-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/pipeline.svg
 [coverage-badge]: https://gitlab.com/laymonage/django-template-heroku/badges/master/coverage.svg
 [commits-gl]: https://gitlab.com/laymonage/django-template-heroku/-/commits/master
+[readme-id]: README.md
 [heroku-dashboard]: https://dashboard.heroku.com
 [djecrety]: https://djecrety.ir
 [account-settings]: https://dashboard.heroku.com/account
