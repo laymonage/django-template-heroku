@@ -26,9 +26,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 # Please set SECRET_KEY environment variable in your production environment
 # (e.g. Heroku).
-SECRET_KEY = os.getenv(
-    'SECRET_KEY', '61f1byet7&3)7d+0rtop(!dbg%@5mn!e++gba#$yl5wr!0&w3w'
-)
+SECRET_KEY = os.getenv('SECRET_KEY', '{{ secret_key }}')
 
 # Automatically determine environment by detecting if DATABASE_URL variable.
 # DATABASE_URL is provided by Heroku if a database add-on is added
