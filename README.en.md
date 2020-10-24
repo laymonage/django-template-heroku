@@ -340,7 +340,7 @@ generated with this template may be distributed under different licenses.
 [pylint]: https://pypi.org/project/pylint
 [black]: https://pypi.org/project/black
 [isort]: https://pypi.org/project/isort
-[template]: https://docs.djangoproject.com/en/3.1/ref/django-admin/#cmdoption-startproject-template
+[template]: https://docs.djangoproject.com/en/{{ docs_version }}/ref/django-admin/#cmdoption-startproject-template
 [repo-gh]: https://github.com/laymonage/django-template-heroku
 [repo-gl]: https://gitlab.com/laymonage/django-template-heroku
 [license]: LICENSE
