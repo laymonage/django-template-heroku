@@ -84,8 +84,8 @@ deployed to Heroku via GitHub Actions or GitLab CI.
    or `.gitignore`. Just leave them blank.
 
 8. If you use GitLab, go to the **Settings** menu in the left sidebar. In the
-   Variables section, add a variable named `HEROKU_API_KEY` with the API key of
-   your Heroku account as its value. Then, add another variable named
+   **Variables** section, add a variable named `HEROKU_API_KEY` with the API
+   key of your Heroku account as its value. Then, add another variable named
    `HEROKU_APP_NAME` with your Heroku app name **without `.herokuapp.com`** as
    its value.
 
@@ -139,8 +139,7 @@ deployed to Heroku via GitHub Actions or GitLab CI.
 
 13. Congratulations! Now, you just need to focus on developing your web project
     without having to worry about deployment problems. Before developing your
-    web project, please install the required packages with the following
-    command.
+    web project, install the required packages with the following command.
 
     ```shell
     python -m pip install -r requirements.txt
@@ -171,7 +170,7 @@ deployed to Heroku via GitHub Actions or GitLab CI.
     ```
 
     The generated migration files should be committed into the repository
-    (<sup><sub>unless you change the template configuration so that it's not
+    <sup><sub>(unless you change the template configuration so that it's not
     necessary... but why?)</sub></sup>.
 
 17. To run the unit tests, you can use the following command.
@@ -309,7 +308,7 @@ context variables that can be rendered into it.
 Please use this template as a **learning resource as much as possible**. It is
 true that this template can make it easier for you to create Django projects
 that are ready to be deployed without having to deal with many configurations.
-However, it would be very beneficial for you if you understand how the
+However, it will be very beneficial for you if you understand how the
 configurations work in this template.
 
 ## Contributing
